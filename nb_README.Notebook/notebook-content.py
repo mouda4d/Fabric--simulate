@@ -6,7 +6,18 @@
 # META   "kernel_info": {
 # META     "name": "synapse_pyspark"
 # META   },
-# META   "dependencies": {}
+# META   "dependencies": {
+# META     "lakehouse": {
+# META       "default_lakehouse": "6c54f02f-db6d-408b-af73-0d7359844470",
+# META       "default_lakehouse_name": "lh_contoso",
+# META       "default_lakehouse_workspace_id": "200ec9d1-af61-4293-b45d-b22223a97add",
+# META       "known_lakehouses": [
+# META         {
+# META           "id": "6c54f02f-db6d-408b-af73-0d7359844470"
+# META         }
+# META       ]
+# META     }
+# META   }
 # META }
 
 # MARKDOWN ********************
@@ -33,7 +44,7 @@
 # | gold_daily_revenue | revenue      | Delivered revenue per day and zone             | Internal                  |
 # 
 # ## Known limitations (the backlog, honestly)
-# - Re-sent orders are double-counted (Sprint 2)
+# - Re-sent orders are double-counted (Sprint 2) SOLVED
 # - Every run reprocesses every file (Sprint 3)
 # - Settings are the same in every stage (Sprint 4)
 # - Bad data is not stopped (Sprint 5)
