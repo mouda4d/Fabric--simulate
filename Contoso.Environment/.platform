@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Environment",
+    "displayName": "Contoso",
+    "description": "Environment"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "aa8ac93e-c2fd-43d6-845c-b50feb8b98f3"
+  }
+}

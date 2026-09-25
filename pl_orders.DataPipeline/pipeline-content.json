@@ -1,0 +1,102 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "22f3757f-10e2-465a-95a5-baf53537eae5",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "orders_per_run": {
+              "value": "500",
+              "type": "int"
+            },
+            "dup_rate": {
+              "value": "0.08",
+              "type": "float"
+            },
+            "update_rate": {
+              "value": "0.1",
+              "type": "float"
+            },
+            "late_rate": {
+              "value": "0.05",
+              "type": "float"
+            },
+            "bad_row_pct": {
+              "value": "0",
+              "type": "int"
+            },
+            "fraud_rings": {
+              "value": "1",
+              "type": "int"
+            },
+            "refund_abusers": {
+              "value": "1",
+              "type": "int"
+            },
+            "seed": {
+              "value": "-1",
+              "type": "int"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "00.01:00:00",
+          "retry": 2,
+          "retryIntervalInSeconds": 180,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "simulate",
+        "dependsOn": []
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "719c446c-03e4-4976-bd86-bc16020621d2",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "00.01:00:00",
+          "retry": 2,
+          "retryIntervalInSeconds": 180,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "silver",
+        "dependsOn": [
+          {
+            "activity": "simulate",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "950fa2a1-8670-44e5-ac35-ab6c642361c3",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "00.01:00:00",
+          "retry": 2,
+          "retryIntervalInSeconds": 180,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "gold",
+        "dependsOn": [
+          {
+            "activity": "silver",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

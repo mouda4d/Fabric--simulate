@@ -1,0 +1,57 @@
+table gold_daily_revenue
+	lineageTag: 3a5027af-f319-4a9d-ac97-ef5cf93e37ff
+	sourceLineageTag: [dbo].[gold_daily_revenue]
+
+	column order_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 1c57cff7-1d8c-46e7-8621-71eecf49b2b0
+		sourceLineageTag: order_date
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column zone
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d645ddce-2556-4216-8b9b-5f4f1ac05239
+		sourceLineageTag: zone
+		summarizeBy: none
+		sourceColumn: zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column orders
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 3d41e974-98f4-48ef-ad36-bebba67d0a98
+		sourceLineageTag: orders
+		summarizeBy: sum
+		sourceColumn: orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue
+		dataType: double
+		sourceProviderType: decimal(20, 2)
+		lineageTag: f02b5f4c-874d-4585-bd55-4370d4628926
+		sourceLineageTag: revenue
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition gold_daily_revenue = entity
+		mode: directLake
+		source
+			entityName: gold_daily_revenue
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+
