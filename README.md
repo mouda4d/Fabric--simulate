@@ -1,14 +1,25 @@
 # Contoso Eats — orders analytics on Microsoft Fabric
 
-A small analytics platform for a fictional food-delivery startup, built the way a real team ships
-one: foundations first, then the thinnest end-to-end version in production, then one improvement per
-sprint — each promoted **Dev → Test → Prod**.
+An end-to-end analytics platform on Microsoft Fabric for a fictional food-delivery startup. A PySpark
+simulator plays the startup's app and produces deliberately messy order data, a medallion lakehouse
+turns it into revenue figures in Power BI, and every change is released **Dev → Test → Prod**.
 
-A notebook stands in for the startup's app, and it's deliberately messy: re-sent orders, late
-arrivals, refunds hours later, orders still in flight, a fraud ring, and a column of personal data.
-Each sprint makes the numbers more trustworthy.
+**Stack:** Microsoft Fabric (Lakehouse, Notebooks, Data Pipelines, Direct Lake semantic model, Power
+BI, deployment pipelines, Git integration) · PySpark · Spark SQL · Delta Lake · Azure DevOps (Repos,
+Boards)
 
-**Status:** v0.2 in production — 3 of 12 sprints shipped. Next: incremental loads.
+**Highlights**
+
+- **Medallion architecture** (bronze, silver, gold) built from dirty data: re-sent and updated
+  orders, late arrivals, refunds, and a column of personal data
+- **Data quality enforced in the pipeline:** the latest version of each order via a window function,
+  and checks that fail the run on duplicate orders or leaked personal data
+- **CI/CD the Fabric way:** Git integration on Dev, a Dev → Test → Prod deployment pipeline, and data
+  source rules so each stage's report reads its own data
+- **Planned in Azure Boards** as epics, features and one user story per sprint
+
+**Status:** v0.2 released to the Prod workspace, running on simulated data — 3 of 12 sprints done.
+Next: incremental loads.
 
 ## Roadmap
 
@@ -62,7 +73,7 @@ flowchart LR
 - A Direct Lake model doesn't rebind when it's deployed. `sm_contoso` is Direct Lake **on SQL** —
   the only flavour a deployment rule can repoint — so each stage's report reads its own stage.
 - Work is tracked in Azure Boards: epics for outcomes, features for capabilities, one user story
-  per sprint. Commit messages carry the story's ID.
+  per sprint. Release commits reference the stories they close.
 
 ## Production readiness, now and next
 
